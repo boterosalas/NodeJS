@@ -11,12 +11,16 @@ switch (comando) {
         break;
     case 'list':
         console.log('List all tasks')
-        toDo.loadDB().forEach(element => {
-            console.log("========To Do========".green);
-            console.log(element.description);
-            console.log("Completed:", element.completed);
-            console.log("=====================".green);
-        });
+        if (toDo.loadDB().length === 0) {
+            console.log('There are no tasks')
+        } else {
+            toDo.loadDB().forEach(element => {
+                console.log("========To Do========".green);
+                console.log(element.description);
+                console.log("Completed:", element.completed);
+                console.log("=====================".green);
+            });
+        }
         break;
     case 'update':
         let update = toDo.updateDB(argv.description, argv.completed)
